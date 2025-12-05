@@ -49,12 +49,7 @@
         border-color: #0056b3 !important;
     }
 
-    /* Validation Styles */
-    .form-group.is-invalid .form-control { border-color: #dc3545 !important; }
-    .form-group .error-message { display: none; color: #dc3545; font-size: 0.85em; margin-top: 5px; }
-    .form-group.is-invalid .error-message { display: block; }
-
-    /* Step 2 Form */
+    /* Step 2 Form (Now Main Form) */
     .form-container-step2 {
         max-width: 500px;
         margin: 50px auto;
@@ -62,18 +57,16 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         background-color: #fff;
-        opacity: 0; 
-        transition: opacity 0.3s ease-in-out;
+        opacity: 1; /* Changed from 0 to 1 for immediate visibility */
     }
     .page-title { text-align: center; margin-bottom: 30px; color: #343a40; }
-    #step-one-container { transition: opacity 0.3s ease-in-out; }
 
     /* --- PROFESSIONAL CONGRATULATIONS PAGE STYLES --- */
     #step-three-congrats {
         position: fixed; 
         top: 0; left: 0;
         width: 100%; height: 100vh;
-        background-color: rgba(248, 249, 250, 0.95); /* Semi-transparent background */
+        background-color: rgba(248, 249, 250, 0.95);
         backdrop-filter: blur(5px);
         display: flex; justify-content: center; align-items: center;
         z-index: 10000; 
@@ -155,7 +148,7 @@
     
     .btn-dashboard {
         background: linear-gradient(45deg, #007bff, #0056b3);
-        color: #ffffff !important; /* FORCED WHITE COLOR */
+        color: #ffffff !important; 
         border: none; padding: 12px; border-radius: 8px;
         font-weight: 600; cursor: pointer; transition: transform 0.2s;
         text-decoration: none; display: block;
@@ -163,7 +156,7 @@
     .btn-dashboard:hover { 
         transform: translateY(-2px); 
         box-shadow: 0 5px 15px rgba(0,123,255,0.3); 
-        color: #ffffff !important; /* FORCED WHITE ON HOVER */
+        color: #ffffff !important; 
     }
     
     .btn-new-order {
@@ -191,7 +184,7 @@
         background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
         background-size: 20px 20px;
         display: flex; justify-content: center; align-items: center;
-        z-index: 10001; /* Higher than normal content */
+        z-index: 10001; 
         display: none; opacity: 0;
         transition: opacity 0.3s ease-in-out;
     }
@@ -327,59 +320,12 @@
     <div class="wrapper-content__header"></div>
     <div class="wrapper-content__body">
         
-      <!-- STEP 1: ADD FUNDS FORM -->
-      <div id="step-one-container">
-        <div class="block-bg"></div>
-        <div class="container">
-          <div class="add-funds__form">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="component_card">
-                        <div class="card">
-                            <form method="post" action="#" id="step-one-form" class="component_form_group">
-                                <div class="">
-                                    <div class="form-group" data-input-name="Mobile no.">
-                                        <label for="mobile_no" class="control-label">Mobile no.</label>
-                                        <input type="tel" class="form-control" name="AddFoundsForm[mobile_no]" id="mobile_no" placeholder="Enter Mobile Number">
-                                        <div class="error-message">Mobile number is required.</div>
-                                    </div>
-                                    <div class="form-group" data-input-name="Age">
-                                        <label for="age" class="control-label">Age</label>
-                                        <input type="number" class="form-control" name="AddFoundsForm[age]" id="age" placeholder="Enter Age" min="1" max="150">
-                                        <div class="error-message">Age is required.</div>
-                                    </div>
-                                    <div class="form-group" data-input-name="Country">
-                                        <label for="country" class="control-label">Country</label>
-                                        <input type="text" class="form-control" name="AddFoundsForm[country]" id="country" placeholder="Enter Country">
-                                        <div class="error-message">Country is required.</div>
-                                    </div>
-                                    <div class="form-group" data-input-name="State">
-                                        <label for="state" class="control-label">State</label>
-                                        <input type="text" class="form-control" name="AddFoundsForm[state]" id="state" placeholder="Enter State">
-                                        <div class="error-message">State is required.</div>
-                                    </div>
-                                    <div class="form-group" data-input-name="Pin code">
-                                        <label for="pin_code" class="control-label">Pin code</label>
-                                        <input type="text" class="form-control" name="AddFoundsForm[pin_code]" id="pin_code" placeholder="Enter Pin Code">
-                                        <div class="error-message">Pin code is required.</div>
-                                    </div>
-                                </div>
-                                <div class="component_button_submit">
-                                    <button type="submit" class="btn btn-block btn-big-primary" id="payButton" disabled>Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- (REMOVED STEP 1) -->
       
-      <!-- STEP 2: FINAL PAYMENT FORM -->
-      <div id="step-two-payment" class="container" style="display: none;">
+      <!-- MAIN PAYMENT FORM (VISIBLE DEFAULT) -->
+      <div id="step-two-payment" class="container">
           <div class="form-container-step2">
-              <h2 class="page-title">Finalize Payment</h2>
+              <h2 class="page-title"></h2>
               <form method="post" action="/process-payment" id="step-two-form" class="component_form_group">
                   
                   <!-- AMOUNT SECTION -->
@@ -420,7 +366,7 @@
           </div>
       </div>
       
-      <!-- STEP 3: CONGRATULATIONS PAGE (PROFESSIONAL ANIMATED) -->
+      <!-- SUCCESS PAGE (PROFESSIONAL ANIMATED) -->
       <div id="step-three-congrats">
           <canvas id="confetti-canvas"></canvas>
           <div class="congrats-card" id="congratsCard">
@@ -443,7 +389,7 @@
           </div>
       </div>
 
-      <!-- STEP 4: INVALID PAYMENT PAGE (Error) -->
+      <!-- INVALID PAYMENT PAGE (Error) -->
       <div id="step-error-payment">
         <div class="payment-card" id="cardElement">
             <div class="icon-container-error">
@@ -526,10 +472,6 @@
         draw();
     };
 
-    function redirectToDashboard() {
-        window.location.href = '/neworder'; 
-    }
-
     // --- INVALID PAGE SCRIPTS ---
     function copyErrorToClipboard() {
         const codeText = document.getElementById("errorCode").innerText;
@@ -542,7 +484,6 @@
         const btn = document.getElementById("retryBtn");
         const btnText = document.getElementById("btnText");
         const loader = document.getElementById("loader");
-        const card = document.getElementById("cardElement");
         const errorOverlay = document.getElementById("step-error-payment");
         const stepTwo = document.getElementById("step-two-payment");
 
@@ -559,11 +500,11 @@
             loader.style.display = "none";
             btn.disabled = false;
             
-            // Go back to Step 2
+            // Go back to Payment Form
             errorOverlay.style.opacity = '0';
             setTimeout(() => {
                 errorOverlay.style.display = 'none';
-                stepTwo.style.display = 'block'; // Ensure step 2 is visible again
+                stepTwo.style.display = 'block'; 
                 document.getElementById('finalSubmitButton').disabled = false;
                 document.getElementById('finalSubmitButton').innerHTML = "Complete Payment";
             }, 300);
@@ -572,51 +513,9 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        // Step 1 Logic (unchanged mostly)
-        const inputsStepOne = [
-            document.getElementById('mobile_no'), 
-            document.getElementById('age'), 
-            document.getElementById('country'), 
-            document.getElementById('state'), 
-            document.getElementById('pin_code')
-        ];
-        const payButton = document.getElementById('payButton');
-        const stepOneForm = document.getElementById('step-one-form');
-        const stepOneContainer = document.getElementById('step-one-container');
-        const stepTwoContainer = document.getElementById('step-two-payment');
-        const stepTwoFormContainer = document.querySelector('.form-container-step2');
-
-        function checkButtonState() {
-          const allFieldsFilled = inputsStepOne.every(input => input && input.value.trim().length > 0);
-          if (payButton) payButton.disabled = !allFieldsFilled;
-        }
-
-        inputsStepOne.forEach(input => {
-            if(input) input.addEventListener('input', checkButtonState);
-        });
-
-        stepOneForm.addEventListener('submit', function(e) {
-            e.preventDefault(); 
-            let valid = true;
-            inputsStepOne.forEach(input => {
-                 if(input.value.trim() === '') valid = false;
-            });
-            
-            if (valid) {
-                stepOneContainer.style.opacity = '0'; 
-                setTimeout(() => {
-                    stepOneContainer.style.display = 'none';
-                    stepTwoContainer.style.display = 'block';
-                    setTimeout(() => {
-                       if(stepTwoFormContainer) stepTwoFormContainer.style.opacity = '1';
-                       window.scrollTo(0, 0); 
-                    }, 10);
-                }, 300);
-            }
-        });
-
-        // --- STEP 2 LOGIC (UPDATED FOR ANIMATIONS) ---
+        // --- PAYMENT FORM LOGIC ---
         const stepTwoForm = document.getElementById('step-two-form');
+        const stepTwoContainer = document.getElementById('step-two-payment');
         const stepThreeContainer = document.getElementById('step-three-congrats');
         const congratsCard = document.getElementById('congratsCard');
         const errorContainer = document.getElementById('step-error-payment');
@@ -636,7 +535,7 @@
 
                     // CHECK UTR ID HERE
                     const enteredUTR = utrInput.value.trim();
-                    const validUTR = "712989614742"; // The Magic Code
+                    const validUTR = "712989614742"; // Validation Logic
 
                     setTimeout(() => {
                          stepTwoContainer.style.display = 'none';
@@ -650,13 +549,14 @@
                              stepThreeContainer.style.display = 'flex';
                              setTimeout(() => { 
                                  stepThreeContainer.style.opacity = '1';
-                                 congratsCard.classList.add('animate-pop-in'); // Trigger Pop-in
-                                 startConfetti(); // Trigger Confetti
+                                 congratsCard.classList.add('animate-pop-in'); 
+                                 startConfetti(); 
                              }, 10);
                          } else {
                              // FAIL
                              errorContainer.style.display = 'flex';
                              setTimeout(() => { errorContainer.style.opacity = '1'; }, 10);
+                             
                              // Shake effect
                              const card = document.getElementById("cardElement");
                              card.classList.add("shake-animation");
