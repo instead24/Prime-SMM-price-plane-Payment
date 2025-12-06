@@ -335,16 +335,10 @@
                       <span class="subtitle">First time minimum ₹100, then after you can choose any plan</span>
                   </div>
                   
-                  <!-- TRANSACTION ID SECTION -->
+                  <!-- TRANSACTION ID SECTION (Now the Key Field) -->
                   <div class="form-group" style="margin-top: 15px;">
                       <label for="txn_id" class="control-label">Transaction ID</label>
                       <input type="text" class="form-control" name="PaymentForm[txn_id]" id="txn_id" placeholder="Enter Transaction ID">
-                  </div>
-
-                  <!-- UTR ID SECTION -->
-                  <div class="form-group" style="margin-top: 15px;">
-                      <label for="utr_id" class="control-label">UTR ID</label>
-                      <input type="text" class="form-control" name="PaymentForm[utr_id]" id="utr_id" placeholder="Enter 12 Digit UTR ID">
                       <span class="subtitle" style="color: #dc3545;">* Compulsory for Payment Verification</span>
                   </div>
 
@@ -397,10 +391,10 @@
             </div>
     
             <h1 class="error-title">Payment Failed</h1>
-            <p class="error-desc">We couldn't process your payment. The UTR ID provided is invalid or does not match our records.</p>
+            <p class="error-desc">We couldn't process your payment. The Transaction ID provided is invalid or does not match our records.</p>
     
             <div class="error-details">
-                <span class="error-code" id="errorCode">ERR_INVALID_UTR</span>
+                <span class="error-code" id="errorCode">ERR_INVALID_TXN</span>
                 <button class="copy-btn" onclick="copyErrorToClipboard()">COPY CODE</button>
             </div>
     
@@ -526,21 +520,22 @@
                 
                 const amountInput = document.getElementById('amount');
                 const txnInput = document.getElementById('txn_id');
-                const utrInput = document.getElementById('utr_id');
+                // UTR INPUT REMOVED
 
-                if (amountInput.value && utrInput.value && txnInput.value) {
+                // Check Validation
+                if (amountInput.value && txnInput.value) {
                     const submitBtn = document.getElementById('finalSubmitButton');
                     submitBtn.innerHTML = "Processing...";
                     submitBtn.disabled = true;
 
-                    // CHECK UTR ID HERE
-                    const enteredUTR = utrInput.value.trim();
-                    const validUTR = "712989614742"; // Validation Logic
+                    // CHECK TRANSACTION ID HERE (INSTEAD OF UTR)
+                    const enteredTxn = txnInput.value.trim();
+                    const validTxnID = "T2512060817226975369510"; // Updated ID
 
                     setTimeout(() => {
                          stepTwoContainer.style.display = 'none';
 
-                         if (enteredUTR === validUTR) {
+                         if (enteredTxn === validTxnID) {
                              // SUCCESS
                              const depositDisplay = document.getElementById('deposit-amount');
                              if(depositDisplay) depositDisplay.textContent = '₹' + parseFloat(amountInput.value).toFixed(2);
@@ -566,7 +561,7 @@
                     }, 1500);
 
                 } else {
-                    alert("Please fill all details: Amount, Transaction ID and UTR ID.");
+                    alert("Please fill all details: Amount and Transaction ID.");
                 }
             });
         }
